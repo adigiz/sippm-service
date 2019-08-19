@@ -1,4 +1,4 @@
-package com.gizwanda.sippm.user.model;
+package com.gizwanda.sippm.profile.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gizwanda.sippm.common.model.Constants;
@@ -14,7 +14,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(exclude = {"id","createdAt", "updatedAt"})
-public class User {
+public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;

@@ -1,7 +1,7 @@
 --liquibase formatted sql
 
---changeset giz:001.1
-CREATE TABLE IF NOT EXISTS user (
+--changeset giz:002.1
+CREATE TABLE IF NOT EXISTS profile (
     id INT NOT NULL AUTO_INCREMENT,
     nip VARCHAR(10),
     nama VARCHAR(35),

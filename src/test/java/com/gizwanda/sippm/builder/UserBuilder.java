@@ -1,8 +1,8 @@
 package com.gizwanda.sippm.builder;
 
 import com.github.javafaker.Faker;
-import com.gizwanda.sippm.user.UserRepository;
-import com.gizwanda.sippm.user.model.User;
+import com.gizwanda.sippm.profile.ProfileRepository;
+import com.gizwanda.sippm.profile.model.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +12,7 @@ import java.sql.Date;
 public class UserBuilder {
 
     @Autowired
-    UserRepository userRepository;
+    ProfileRepository profileRepository;
 
     private Faker faker = new Faker();
     private int id = faker.number().randomDigit();
@@ -26,15 +26,15 @@ public class UserBuilder {
     private Date createdAt = new Date(new java.util.Date().getTime());
     private Date updatedAt = new Date(new java.util.Date().getTime());
 
-    public User build(){
-        return new User(id,nip, nama, pangkat, jabatan, lab, alamat, noTelp, createdAt, updatedAt);
+    public Profile build(){
+        return new Profile(id,nip, nama, pangkat, jabatan, lab, alamat, noTelp, createdAt, updatedAt);
     }
 
-    public User create(){
-        return userRepository.save(build());
+    public Profile create(){
+        return profileRepository.save(build());
     }
 
     public void cleanUp(){
-        userRepository.deleteAll();
+        profileRepository.deleteAll();
     }
 }
