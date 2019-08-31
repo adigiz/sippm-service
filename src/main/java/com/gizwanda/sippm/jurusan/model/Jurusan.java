@@ -15,5 +15,5 @@ public class Jurusan {
 
     @Column
     @NonNull
-    private String namaJurusan;
+    private String nama;
 }
