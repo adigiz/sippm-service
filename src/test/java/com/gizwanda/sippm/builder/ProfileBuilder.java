@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 import java.sql.Date;
 
 @Component
-public class UserBuilder {
+public class ProfileBuilder {
 
     @Autowired
     ProfileRepository profileRepository;
