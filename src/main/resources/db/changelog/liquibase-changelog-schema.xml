@@ -8,5 +8,6 @@
     <include file="sql-scripts/create/create-profile.sql" relativeToChangelogFile="true"/>
     <include file="sql-scripts/create/create-jurusan.sql" relativeToChangelogFile="true"/>
     <include file="sql-scripts/insert/insert-jurusan.sql" relativeToChangelogFile="true"/>
+    <include file="sql-scripts/insert/create-prodi.sql" relativeToChangelogFile="true"/>
     <include file="sql-scripts/insert/insert-prodi.sql" relativeToChangelogFile="true"/>
 </databaseChangeLog>
