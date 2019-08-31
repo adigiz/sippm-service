@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.*;
 
 @Data
-@Entity()
+@Entity
 @RequiredArgsConstructor
 @NoArgsConstructor
 public class Prodi {
@@ -24,4 +24,9 @@ public class Prodi {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "jurusan_id")
     private Jurusan jurusan;
+
+    public Prodi(ProdiDTO prodiDTO) {
+        this.nama = prodiDTO.getNama();
+        this.jurusan = prodiDTO.getJurusan();
+    }
 }

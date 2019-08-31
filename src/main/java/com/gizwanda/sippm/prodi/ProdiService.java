@@ -3,7 +3,7 @@ package com.gizwanda.sippm.prodi;
 import com.gizwanda.sippm.common.exception.AlreadyExistException;
 import com.gizwanda.sippm.common.exception.ResourceNotFoundException;
 import com.gizwanda.sippm.prodi.model.Prodi;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.gizwanda.sippm.prodi.model.ProdiDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -26,11 +26,14 @@ public class ProdiService {
         return prodiRepository.findById(prodiId).orElseThrow(() -> new ResourceNotFoundException("Prodi not found with id: " + prodiId));
     }
 
-    ResponseEntity<Prodi> create(Prodi prodi) {
+    ResponseEntity<ProdiDTO> create(ProdiDTO prodiDTO) {
+        Prodi prodi = new Prodi(prodiDTO);
         if(prodiRepository.existsByNama(prodi.getNama())) {
             throw new AlreadyExistException("Prodi with the current name already exists");
         }
         Prodi savedProdi = prodiRepository.save(prodi);
-        return new ResponseEntity<>(savedProdi, HttpStatus.CREATED);
+        ProdiDTO returnedProdi = new ProdiDTO(savedProdi);
+        return new ResponseEntity<>(returnedProdi, HttpStatus.CREATED);
     }
+
 }

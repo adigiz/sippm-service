@@ -4,6 +4,7 @@ import com.gizwanda.sippm.builder.ProdiBuilder;
 import com.gizwanda.sippm.common.exception.AlreadyExistException;
 import com.gizwanda.sippm.common.exception.ResourceNotFoundException;
 import com.gizwanda.sippm.prodi.model.Prodi;
+import com.gizwanda.sippm.prodi.model.ProdiDTO;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -58,7 +59,8 @@ public class ProdiServiceTest {
     public void create_expectThrowsAlreadyExistsExceptionWhenProdiWithTheSameNameExists() {
         String nama = "Sistem Informasi";
         prodiBuilder.withNama(nama).create();
-        Prodi newProdi = prodiBuilder.withNama(nama).build();
+        Prodi prodi = prodiBuilder.withNama(nama).build();
+        ProdiDTO newProdi = prodiBuilder.buildDTO(prodi);
 
         prodiService.create(newProdi);
     }
@@ -66,13 +68,14 @@ public class ProdiServiceTest {
     @Test
     public void create_expectReturnResponseEntityWithCreatedProdiAndStatusCode201WhenCreated() {
         Prodi prodi = prodiBuilder.build();
+        ProdiDTO prodiDTO = prodiBuilder.buildDTO(prodi);
 
-        ResponseEntity result = prodiService.create(prodi);
+        ResponseEntity result = prodiService.create(prodiDTO);
         Prodi actualProdi = prodiRepository.findAll().get(0);
 
         assertEquals(HttpStatus.CREATED, result.getStatusCode());
-        assertEquals(prodi, result.getBody());
-        assertEquals(prodi, actualProdi);
+        assertEquals(prodiDTO, result.getBody());
+        assertEquals(prodiDTO, new ProdiDTO(actualProdi));
     }
 
     @Test(expected = ResourceNotFoundException.class)
