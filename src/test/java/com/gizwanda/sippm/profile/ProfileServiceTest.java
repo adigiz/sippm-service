@@ -1,6 +1,6 @@
 package com.gizwanda.sippm.profile;
 
-import com.gizwanda.sippm.builder.UserBuilder;
+import com.gizwanda.sippm.builder.ProfileBuilder;
 import com.gizwanda.sippm.common.exception.AlreadyExistException;
 import com.gizwanda.sippm.common.exception.ResourceNotFoundException;
 import com.gizwanda.sippm.profile.model.Profile;
@@ -26,19 +26,19 @@ public class ProfileServiceTest {
     ProfileService profileService;
 
     @Autowired
-    UserBuilder userBuilder;
+    ProfileBuilder profileBuilder;
 
     @Autowired
     ProfileRepository profileRepository;
 
     @After
     public void cleanUp() {
-        userBuilder.cleanUp();
+        profileBuilder.cleanUp();
     }
 
     @Test
     public void create_expectUserCreated(){
-        Profile createdProfile = userBuilder.build();
+        Profile createdProfile = profileBuilder.build();
 
         profileService.create(createdProfile);
 
@@ -48,7 +48,7 @@ public class ProfileServiceTest {
 
     @Test(expected = AlreadyExistException.class)
     public void create_expectThrowsAlreadyExistsException_whenUserAlreadyExists() {
-        Profile createdProfile = userBuilder.create();
+        Profile createdProfile = profileBuilder.create();
         profileService.create(createdProfile);
     }
 
@@ -61,9 +61,8 @@ public class ProfileServiceTest {
 
     @Test
     public void fetchAll_expectReturnAllUser() {
-        Profile createdProfile = userBuilder.create();
+        Profile createdProfile = profileBuilder.create();
         List<Profile> expectedProfiles = Collections.singletonList(createdProfile);
-
         List<Profile> actualProfiles = profileService.fetchAll();
 
         assertEquals(expectedProfiles, actualProfiles);
@@ -71,7 +70,7 @@ public class ProfileServiceTest {
 
     @Test
     public void fetchById_expectReturnUser_whenIdFound() {
-        Profile createdProfile = userBuilder.create();
+        Profile createdProfile = profileBuilder.create();
         int userId = createdProfile.getId();
 
         Profile actualProfile = profileService.fetchById(userId);
@@ -81,7 +80,7 @@ public class ProfileServiceTest {
 
     @Test(expected = ResourceNotFoundException.class)
     public void fetchById_expectThrowsResourceNotFoundException_whenUserNotFound() {
-        Profile createdProfile = userBuilder.build();
+        Profile createdProfile = profileBuilder.build();
         int userId = createdProfile.getId();
 
         profileService.fetchById(userId);
