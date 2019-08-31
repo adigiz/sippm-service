@@ -12,18 +12,18 @@ public class JurusanBuilder {
     JurusanRepository jurusanRepository;
 
     Faker faker = new Faker();
-    String namaJurusan = faker.name().fullName();
+    String nama = faker.name().fullName();
 
     public Jurusan build() {
-        return new Jurusan(namaJurusan);
+        return new Jurusan(nama);
     }
 
     public Jurusan create() {
         return jurusanRepository.save(build());
     }
 
-    public JurusanBuilder withNamaJurusan(String namaJurusan) {
-        this.namaJurusan = namaJurusan;
+    public JurusanBuilder withNama(String nama) {
+        this.nama = nama;
         return this;
     }
 

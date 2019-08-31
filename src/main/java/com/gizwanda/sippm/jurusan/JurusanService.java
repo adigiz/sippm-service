@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class JurusanService {
-
     private final JurusanRepository jurusanRepository;
 
     public JurusanService(JurusanRepository jurusanRepository) {
@@ -19,8 +18,8 @@ public class JurusanService {
     }
 
     ResponseEntity<Jurusan> create(Jurusan jurusan) {
-        String namaJurusan = jurusan.getNamaJurusan();
-        if(jurusanRepository.existsByNamaJurusan(namaJurusan)){
+        String namaJurusan = jurusan.getNama();
+        if(jurusanRepository.existsByNama(namaJurusan)){
             throw new AlreadyExistException("Jurusan with the current name already exists");
         }
         Jurusan savedJurusan = jurusanRepository.save(jurusan);

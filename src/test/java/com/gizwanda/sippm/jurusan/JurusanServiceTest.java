@@ -55,8 +55,8 @@ public class JurusanServiceTest {
 
     @Test(expected = AlreadyExistException.class)
     public void create_expectThrowsAlreadyExistsExceptionWhenNamaJurusanExists() {
-        jurusanBuilder.withNamaJurusan("Jurusan Matematika dan Teknologi Informasi").create();
-        Jurusan newJurusan = jurusanBuilder.withNamaJurusan("Jurusan Matematika dan Teknologi Informasi").build();
+        jurusanBuilder.withNama("Jurusan Matematika dan Teknologi Informasi").create();
+        Jurusan newJurusan = jurusanBuilder.withNama("Jurusan Matematika dan Teknologi Informasi").build();
 
         jurusanService.create(newJurusan);
     }

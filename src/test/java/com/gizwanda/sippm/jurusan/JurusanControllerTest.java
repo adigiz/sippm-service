@@ -1,9 +1,7 @@
 package com.gizwanda.sippm.jurusan;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.gizwanda.sippm.builder.JurusanBuilder;
-import com.gizwanda.sippm.common.exception.AlreadyExistException;
 import com.gizwanda.sippm.jurusan.model.Jurusan;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,7 +20,6 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -68,7 +65,7 @@ public class JurusanControllerTest {
         this.mockMvc.perform(get("/api/v1/jurusans/" + expectedId)
                     .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk())
-                    .andExpect(jsonPath("$.namaJurusan", is(jurusan.getNamaJurusan())))
+                    .andExpect(jsonPath("$.nama", is(jurusan.getNama())))
                     .andReturn();
 
         verify(jurusanService, times(1)).fetchById(expectedId);
