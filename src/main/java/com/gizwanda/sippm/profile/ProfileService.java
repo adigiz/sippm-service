@@ -3,6 +3,8 @@ package com.gizwanda.sippm.profile;
 import com.gizwanda.sippm.common.exception.AlreadyExistException;
 import com.gizwanda.sippm.common.exception.ResourceNotFoundException;
 import com.gizwanda.sippm.profile.model.Profile;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,11 +18,12 @@ public class ProfileService {
         this.profileRepository = profileRepository;
     }
 
-    Profile create(Profile profile) {
+    ResponseEntity<Profile> create(Profile profile) {
         if (profileRepository.existsByNip(profile.getNip())) {
             throw new AlreadyExistException("Profile with the current NIP already exists");
         }
-        return profileRepository.save(profile);
+        Profile savedProfile = profileRepository.save(profile);
+        return new ResponseEntity<>(savedProfile, HttpStatus.CREATED);
     }
 
     List<Profile> fetchAll() {
