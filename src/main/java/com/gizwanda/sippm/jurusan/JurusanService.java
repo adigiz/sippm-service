@@ -3,7 +3,8 @@ package com.gizwanda.sippm.jurusan;
 import com.gizwanda.sippm.common.exception.AlreadyExistException;
 import com.gizwanda.sippm.common.exception.ResourceNotFoundException;
 import com.gizwanda.sippm.jurusan.model.Jurusan;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,12 +18,13 @@ public class JurusanService {
         this.jurusanRepository = jurusanRepository;
     }
 
-    Jurusan create(Jurusan jurusan) {
+    ResponseEntity<Jurusan> create(Jurusan jurusan) {
         String namaJurusan = jurusan.getNamaJurusan();
         if(jurusanRepository.existsByNamaJurusan(namaJurusan)){
             throw new AlreadyExistException("Jurusan with the current name already exists");
         }
-        return jurusanRepository.save(jurusan);
+        Jurusan savedJurusan = jurusanRepository.save(jurusan);
+        return new ResponseEntity<>(savedJurusan, HttpStatus.CREATED);
     }
 
     List<Jurusan> fetchAll() {

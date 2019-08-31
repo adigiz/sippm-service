@@ -1,6 +1,7 @@
 package com.gizwanda.sippm.jurusan;
 
 import com.gizwanda.sippm.jurusan.model.Jurusan;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -22,7 +23,7 @@ public class JurusanController {
     }
 
     @PostMapping("/jurusans")
-    public Jurusan createJurusan(@Valid @RequestBody Jurusan jurusan) {
+    public ResponseEntity<Jurusan> createJurusan(@Valid @RequestBody Jurusan jurusan) {
         return jurusanService.create(jurusan);
     }
 
