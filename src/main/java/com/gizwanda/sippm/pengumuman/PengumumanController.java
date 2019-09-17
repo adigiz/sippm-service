@@ -2,7 +2,6 @@ package com.gizwanda.sippm.pengumuman;
 
 import com.gizwanda.sippm.pengumuman.model.Pengumuman;
 import com.gizwanda.sippm.pengumuman.model.PengumumanDTO;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
